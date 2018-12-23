@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FirebaseAuthenticationAndRTDB</string>
+    <string name="btn_PhoneAuth">Phone Authentication</string>
 </resources>
