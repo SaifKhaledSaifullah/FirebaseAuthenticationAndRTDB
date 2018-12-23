@@ -17,6 +17,7 @@ import Utils.FragmentUtilities;
 public class MainFragment extends Fragment implements View.OnClickListener {
     private View view;
     private Button btnOTPAuthentication;
+    private Button btnEmailPassAuth;
     private Context context;
 
     @Nullable
@@ -24,14 +25,25 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         context=getActivity();
         view=inflater.inflate(R.layout.fragment_main,container,false);
-        initializeViewsandAttachListeners(view);
+
+        // Assign Views
+        assignViews(view);
         return view;
     }
 
-    private void initializeViewsandAttachListeners(View view) {
+    private void assignViews(View view) {
         btnOTPAuthentication=view.findViewById(R.id.btnOTPAuthentication);
-        btnOTPAuthentication.setOnClickListener(this);
+        btnEmailPassAuth=view.findViewById(R.id.btnEmailPassAuth);
 
+        // Assign Listeners
+        assignListeners();
+
+
+    }
+
+    private void assignListeners() {
+        btnOTPAuthentication.setOnClickListener(this);
+        btnEmailPassAuth.setOnClickListener(this);
 
     }
 
@@ -42,6 +54,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             case R.id.btnOTPAuthentication:
                 PhoneAuthFragment phoneAuthFragment=new PhoneAuthFragment();
                 new FragmentUtilities(getActivity()).replaceFragment(R.id.container,phoneAuthFragment);
+                break;
+
+            case R.id.btnEmailPassAuth:
+                EmailPassAuthFragment emailPassAuthFragment=new EmailPassAuthFragment();
+                new FragmentUtilities(getActivity()).replaceFragment(R.id.container,emailPassAuthFragment);
                 break;
         }
 

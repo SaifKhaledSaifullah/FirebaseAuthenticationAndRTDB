@@ -31,8 +31,6 @@ import java.util.concurrent.TimeUnit;
 public class PhoneAuthFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "PhoneAuthFragment";
 
-    private static final String KEY_VERIFY_IN_PROGRESS = "key_verify_in_progress";
-
     private static final int STATE_INITIALIZED = 1;
     private static final int STATE_CODE_SENT = 2;
     private static final int STATE_VERIFY_FAILED = 3;
@@ -68,7 +66,7 @@ public class PhoneAuthFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_phone_auth,container,false);
-        Log.e(TAG, "OncreateView");
+
         // Assign all views
         assignViews(view);
 
@@ -152,7 +150,6 @@ public class PhoneAuthFragment extends Fragment implements View.OnClickListener 
     }
 
     private void assignViews(View view) {
-        Log.e(TAG,"View");
         mPhoneNumberViews = view.findViewById(R.id.phoneAuthFields);
         mSignedInViews = view.findViewById(R.id.signedInButtons);
 
@@ -172,7 +169,6 @@ public class PhoneAuthFragment extends Fragment implements View.OnClickListener 
     }
 
     private void assignClickListerns() {
-        Log.e(TAG,"LISTENERS");
         mStartButton.setOnClickListener(this);
         mVerifyButton.setOnClickListener(this);
         mResendButton.setOnClickListener(this);
@@ -359,7 +355,6 @@ public class PhoneAuthFragment extends Fragment implements View.OnClickListener 
 
         switch (v.getId()) {
             case R.id.buttonStartVerification:
-                Log.e(TAG,"Start");
                 if (!validatePhoneNumber()) {
                     return;
                 }
@@ -367,7 +362,7 @@ public class PhoneAuthFragment extends Fragment implements View.OnClickListener 
                 startPhoneNumberVerification(mPhoneNumberField.getText().toString());
                 break;
             case R.id.buttonVerifyPhone:
-                Log.e(TAG,"Verify");
+
                 String code = mVerificationField.getText().toString();
                 if (TextUtils.isEmpty(code)) {
                     mVerificationField.setError("Cannot be empty.");
@@ -377,11 +372,11 @@ public class PhoneAuthFragment extends Fragment implements View.OnClickListener 
                 verifyPhoneNumberWithCode(mVerificationId, code);
                 break;
             case R.id.buttonResend:
-                Log.e(TAG,"RESEND");
+
                 resendVerificationCode(mPhoneNumberField.getText().toString(), mResendToken);
                 break;
             case R.id.signOutButton:
-                Log.e(TAG,"Sign Out");
+
                 signOut();
                 break;
         }
